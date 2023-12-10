@@ -13,15 +13,17 @@
         </div>
         <div>
             <input id="post" type="file" class="btn btn-primary" type="button" onchange="addPhoto(event)" value="Загрузить">
+            <input class="btn btn-primary" type="submit" value="Отправить">
+            <div>сюда должен выводиться url при 200 от сервера после нажатия кнопки "отправить"</div>
         </div>
     </div>
     <div class="container">
         <div class="form-floating mb-3">
             <input type="name" class="form-control" id="floatingInput" placeholder="Название пикчи">
-            <label for="floatingInput">Название пикчи</label>
+            <label for="floatingInput">URL пикчи</label>
         </div>
         <div>
-            <button id="get" type="button" class="btn btn-primary">Получить</button>
+            <button id="get" type="button" class="btn btn-primary">Получить по url</button>
         </div>
         <div>
             <img src="" class="img-fluid" alt="12345">
