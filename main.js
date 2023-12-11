@@ -5,7 +5,7 @@ const buttonPost = document.getElementById('post');
 const buttonPost2 = document.getElementById('post2');
 
 let photo = ''
-let urlPhoto = ''
+let url = ''
 
 buttonPost.addEventListener("change", function(event) {
     console.log("загрузить тык");
@@ -29,9 +29,9 @@ buttonPost2.addEventListener("click", function() {
     axios.post('http://localhost:8080/api/file/send', formData).then(response => {
         switch (response.status) { 
             case 200 : {
-                urlPhoto = response.data 
+                url = response.data 
                 localStorage.setItem('url', response.data)
-                document.getElementById('floatingInput').value = urlPhoto
+                document.getElementById('floatingInput').value = url
             }
         }
     })
@@ -39,7 +39,7 @@ buttonPost2.addEventListener("click", function() {
 
 buttonGet.addEventListener("click", function() {
     console.log("получить тык");
-    axios.get(`http://localhost:8080/api/photo/${localStorage.getItem('urlPhoto')}`)
+    axios.get(`http://localhost:8080/api/file/${localStorage.getItem('url')}`)
         .then(response => {
             switch (response.status) {
                 case 200 :{

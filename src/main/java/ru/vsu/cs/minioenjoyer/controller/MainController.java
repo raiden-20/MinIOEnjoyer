@@ -1,10 +1,13 @@
 package ru.vsu.cs.minioenjoyer.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.vsu.cs.minioenjoyer.service.MinIOConnection;
+
+import java.io.InputStream;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,5 +20,11 @@ public class MainController {
     public ResponseEntity<?> saveFile(@RequestParam("file") MultipartFile file) {
         String url = minIOConnection.saveFile(file);
         return ResponseEntity.ok(url);
+    }
+
+    @GetMapping("/api/file/{url}")
+    @CrossOrigin
+    public ResponseEntity<InputStreamResource> getFile(@PathVariable String url) {
+        return ResponseEntity.ok(minIOConnection.getFile(url));
     }
 }
