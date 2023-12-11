@@ -4,7 +4,7 @@ const buttonGet = document.getElementById('get');
 const buttonPost = document.getElementById('post');
 const buttonPost2 = document.getElementById('post2');
 
-let urlPhoto = '' // здесь хранится url, который я сама генерирую на фото
+let photo = '' // здесь хранится url, который я сама генерирую на фото
 let idPhoto = '' // а здесь уже, который получаю от тебя
 
 buttonPost.addEventListener("change", function(event) {
@@ -19,15 +19,17 @@ buttonPost.addEventListener("change", function(event) {
             el.src = reader.result
         }
     )
-    urlPhoto = URL.createObjectURL(event.target.files[0]); // хранится ссылка на файл типа блоб (бинарные данные) как 'blob:http://localhost:63342/ce925a18-8ba0-4246-a100-d0012473fc62'  вот прям с блоб
-    console.log(urlPhoto)
+
+    photo = event.target.files[0]
+    console.log(photo)
 });
 
 buttonPost2.addEventListener("click", function() {
+    console.log('fgvwsvsw')
     debugger
-    axios.post('http://localhost:8080/api/photo/send', {
-        id: urlPhoto
-    }).then(response => {
+    let formData = new FormData()
+    formData.append('url', photo)
+    axios.post('http://localhost:8080/api/photo/send', formData).then(response => {
         switch (response.status) { // в response.status хранится код
             case 200 : {
                 idPhoto = response.data // в response.data приходит айди/юрл (хз что у тебя будет) фото, то есть ты мне возвращаешь только айди/юрл
