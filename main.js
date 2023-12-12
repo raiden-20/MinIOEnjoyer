@@ -7,16 +7,7 @@ const buttonPost2 = document.getElementById('post2');
 
 let photo = ''
 let url = ''
-let photoByMinio = ''
-var Minio = require('minio');
-
-// Создаем новый клиент Minio
-var minioClient = new Minio.Client({
-  endPoint: 'http://127.0.0.1',
-  port: 9000,
-  accessKey: 'muser',
-  secretKey: 'mpassword'
-});
+let newUrl = ''
 
 buttonPost.addEventListener("change", function(event) {
     console.log("загрузить тык");
@@ -40,8 +31,7 @@ buttonPost2.addEventListener("click", function() {
     axios.post('http://localhost:8080/api/file/send', formData).then(response => {
         switch (response.status) { 
             case 200 : {
-                url = response.data 
-                localStorage.setItem('url', response.data)
+                url = response.data
                 document.getElementById('floatingInput').value = url
             }
         }
@@ -50,14 +40,7 @@ buttonPost2.addEventListener("click", function() {
 
 buttonGet.addEventListener("click", function() {
     console.log("получить тык");
-    var fileStream = minioClient.getObject(url);
-    fileStream.on('data', function(chunk) {
-        // Обрабатываем данные фото
-        var photoData = Buffer.from(chunk).toString('base64'); // Преобразуем данные фото в base64 строку
-        var photoUrl = 'data:image/jpeg;base64,' + photoData; // Формируем URL для отображения фото
-      
-        // Помещаем полученное фото в элемент с id setPhotoOnUrl
-        document.getElementById('setPhotoOnUrl').src = photoUrl;
-      });     
+    newUrl = document.getElementById('floatingInput').value;
+    document.getElementById('setPhotoOnUrl').src = newUrl;
   });
 
