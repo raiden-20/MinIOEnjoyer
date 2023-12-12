@@ -21,7 +21,7 @@ public class MinIOConnection {
                     .object(file.getOriginalFilename())
                     .stream(file.getInputStream(), file.getSize(), 5 * 1024 * 1024)
                     .build());
-            return MinioBucket.PICTURE.toString() + "/" + file.getOriginalFilename();
+            return "http://127.0.0.1:9000/" + MinioBucket.PICTURE.toString() + "/" + file.getOriginalFilename();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;

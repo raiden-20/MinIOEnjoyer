@@ -4,6 +4,7 @@ package ru.vsu.cs.minioenjoyer.configuration;
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
+import io.minio.SetBucketPolicyArgs;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

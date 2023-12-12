@@ -21,10 +21,4 @@ public class MainController {
         String url = minIOConnection.saveFile(file);
         return ResponseEntity.ok(url);
     }
-
-    @GetMapping("/api/file/{url}")
-    @CrossOrigin
-    public ResponseEntity<InputStreamResource> getFile(@PathVariable String url) {
-        return ResponseEntity.ok(minIOConnection.getFile(url));
-    }
 }
